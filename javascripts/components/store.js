@@ -1,27 +1,26 @@
+import cart from './cart.js';
+import utilities from '../helpers/utilities.js'
+
 const bookInfo = {
     price: 24.99,
     title: "Fifty Shades of Chicken",
     image: "./assets/images/book.jpg"
   };
 
-const printToDom = (divId, textToPrint) => {
-    const selectedDiv = document.getElementById(divId);
-    selectedDiv.innerHTML = textToPrint;
-}
-
 const addToCartEvent = () => {
-    console.log('added to cart');
+    cart.setCart(bookInfo);
+    cart.cartToDom();
 };
 
 const makeStore = () => {
     const domString = `
-        <h2>Our Only Book</h2>
-        <p>But it now:</p>
-        <h3>$${bookInfo.price}</h3>
-        <img src=${bookInfo.image} alt='${bookInfo.title} cover' />
-        <button id='cart-button' class='btn btn-danger col-12'>Add to cart</button>
+        <h2 class='text-center'>Our Only Book</h2>
+        <p class='text-center'>But it now:</p>
+        <h3 class='text-center'>$${bookInfo.price}</h3>
+        <img id='chickenBook' src=${bookInfo.image} alt='${bookInfo.title} cover' />
+        <button id='cart-button' class='btn btn-danger col-6 offset-3'>Add to cart</button>
     `;
-    printToDom('store-container', domString);
+    utilities.printToDom('store-container', domString);
     document.getElementById('cart-button').addEventListener('click', addToCartEvent);
 };
 
